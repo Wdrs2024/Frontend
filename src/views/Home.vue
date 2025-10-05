@@ -5,7 +5,7 @@
       <div class="container">
         <h1 class="display-4">Produtos Hospitalares de Qualidade</h1>
         <p class="lead">Equipamentos e suprimentos para clínicas, hospitais e residências.</p>
-        <router-link to="/produtos" class="btn btn-light btn-lg mt-3">Ver Produtos</router-link>
+        
       </div>
     </header>
 

@@ -33,7 +33,7 @@ export default {
   methods: {
     async enviar() {
       try {
-        await axios.post('http://localhost:3000/api/clients', this.cliente);
+        await axios.post('http://localhost:5000/api/clients', this.cliente);
         alert('Cliente cadastrado!');
         this.cliente = { nome: '', email: '', telefone: '' };
       } catch (err) {
