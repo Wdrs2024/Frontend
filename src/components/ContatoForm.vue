@@ -1,7 +1,6 @@
 <template>
   <section id="contato" class="bg-light py-5">
     <div class="container">
-      
       <div class="row">
         <div class="col-md-6">
           <form @submit.prevent="enviarFormulario" class="contato-form">
@@ -65,7 +64,8 @@
 </template>
 
 <script>
-import axios from "axios";
+import api from "@/services/api";
+
 
 export default {
   name: "ContatoForm",
@@ -83,12 +83,12 @@ export default {
   methods: {
     async enviarFormulario() {
       try {
-        const resposta = await axios.post("http://localhost:3000/api/contacts", {
-          name: this.form.nome,
+        const resposta = await api.post("/api/contacts", {
+          nome: this.form.nome,
           email: this.form.email,
-          message: this.form.mensagem,
+          mensagem: this.form.mensagem,
         });
-        this.mensagemSucesso = resposta.data.message || "Mensagem enviada com sucesso!";
+        this.mensagemSucesso = resposta.data.mensagem || "Mensagem enviada com sucesso!";
         this.mensagemErro = "";
         this.form.nome = "";
         this.form.email = "";
@@ -102,40 +102,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.contato-form {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: left;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-input,
-textarea {
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #42b983;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.sucesso {
-  color: green;
-  margin-top: 10px;
-}
-
-.erro {
-  color: red;
-  margin-top: 10px;
-}
-</style>
