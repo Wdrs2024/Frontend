@@ -64,8 +64,7 @@
 </template>
 
 <script>
-import api from "@/services/api";
-
+import api from "@/service/api"; // ✅ mantém este import
 
 export default {
   name: "ContatoForm",
@@ -83,20 +82,18 @@ export default {
   methods: {
     async enviarFormulario() {
       try {
-        const resposta = await api.post("/api/contacts", {
-          nome: this.form.nome,
-          email: this.form.email,
-          mensagem: this.form.mensagem,
-        });
+        // ✅ usa o axios configurado (api.ts)
+        const resposta = await api.post("/contacts", this.form);
+
         this.mensagemSucesso = resposta.data.mensagem || "Mensagem enviada com sucesso!";
         this.mensagemErro = "";
-        this.form.nome = "";
-        this.form.email = "";
-        this.form.mensagem = "";
+
+        // limpa o formulário
+        this.form = { nome: "", email: "", mensagem: "" };
       } catch (erro) {
+        console.error("Erro ao enviar o formulário:", erro);
         this.mensagemErro = "Erro ao enviar o contato.";
         this.mensagemSucesso = "";
-        console.error(erro);
       }
     },
   },
